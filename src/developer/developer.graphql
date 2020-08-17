@@ -1,0 +1,27 @@
+type ProgrammingLanguage {
+  id: Int!
+  name: String!
+}
+
+type Language {
+  id: Int!
+  code: String!
+}
+
+type Developer {
+  id: Int!
+  email: String!
+  programming_languages: [ProgrammingLanguage]
+  languages: [Language]
+}
+
+input DeveloperSearchInput {
+  programming_language: String
+  language: String
+  offset: Int
+  limit: Int
+}
+
+type Query {
+  searchDevelopers(input: DeveloperSearchInput): [Developer!] 
+}
