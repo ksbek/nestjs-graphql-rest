@@ -45,6 +45,15 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+## Seed database
+
+```bash
+# languages and programming languages
+$ npm run db:seed:bootstrap
+
+# developers(dummy)
+$ npm run db:seed:developers
 ```
 
 ## Test

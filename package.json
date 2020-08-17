@@ -9,7 +9,7 @@
     "nestjs": "CLI_PATH=./dist/cli.js npx nestjs-command",
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "db:seed:languages": "npm run nestjs db:seed:languages",
+    "db:seed:bootstrap": "npm run nestjs db:seed:languages",
     "db:seed:developers": "npm run nestjs db:seed:developers",
     "db:seed:drop": "npm run nestjs db:seed:drop",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

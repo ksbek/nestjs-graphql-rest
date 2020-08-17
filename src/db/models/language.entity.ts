@@ -5,7 +5,6 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity
 } from 'typeorm';
-import { IsDefined } from 'class-validator';
 import { LanguageCode } from '../../enums/language_code'
 
 @ObjectType()
