@@ -42,7 +42,7 @@ export class Developer extends BaseEntity {
   languages: Language[];
 
   static searchDevelopers(programming_language: string, language: string, offset: number, limit: number) : Promise<Developer[]> {
-    let query = this.createQueryBuilder('developer')
+    const query = this.createQueryBuilder('developer')
         .leftJoinAndSelect(
           'developer.programming_languages',
           'programming_language',)
@@ -50,24 +50,15 @@ export class Developer extends BaseEntity {
           'developer.languages',
           'language');
 
-    if (programming_language && language) {
-      query = query
-        .where('programming_language.name = :name AND language.code = :code ', { name: programming_language, code: language })
-    } else if (programming_language) {
-      query = query
-        .where('programming_language.name = :name', { name: programming_language })
-    } else if (language) {
-      query = query
-        .where('language.code = :code', { code: language })
-    }
+    const queries = [];
+    const options: any = {};
 
-    if (offset) {
-      query = query.skip(offset);
-    }
+    programming_language && (queries.push(`programming_language.name = :name`), options.name = programming_language);
+    language && (queries.push(`language.code = :code`), options.code = language);
 
-    if (limit) {
-      query = query.take(limit);
-    }
+    queries.length && query.where(queries.join(' AND '), options);
+    offset && query.skip(offset);
+    limit && query.take(limit);
 
     return query.getMany();
   }

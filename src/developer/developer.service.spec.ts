@@ -1,5 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import factory from 'factory-girl';
+import { getConnection } from 'typeorm';
+import { testConnection } from '../tests/test-db-connection';
 import { initializeFactoryGirl } from '../tests/db-factories';
 import { DeveloperService } from './developer.service';
 import { Developer, Language, ProgrammingLanguage } from '../db/models';
@@ -12,24 +14,23 @@ describe('DeveloperService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [testConnection],
       providers: [DeveloperService],
     }).compile();
 
     service = module.get<DeveloperService>(DeveloperService);
+    await initializeFactoryGirl(factory, getConnection());
   });
+
+  afterEach(async () => {
+    await getConnection().synchronize(true)
+  })
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
   it('should get developers', async () => {
-    await initializeFactoryGirl(factory);
-
-    // clean database
-    await Developer.delete({});
-    await Language.delete({});
-    await ProgrammingLanguage.delete({});
-
     const language1 = await factory.create<Language>('language', { code: LanguageCode.English });
     const language2 = await factory.create<Language>('language', { code: LanguageCode.Japanese });
     const language3 = await factory.create<Language>('language', { code: LanguageCode.French });
