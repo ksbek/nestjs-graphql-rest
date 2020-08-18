@@ -22,7 +22,9 @@ describe('Developer Controller', () => {
 
   it('should return array of developers', async () => {
     const result = [];
-    jest.spyOn(service, 'searchDevelopers').mockImplementation(({}) => Promise.resolve(result));
+    jest
+      .spyOn(service, 'searchDevelopers')
+      .mockImplementation(({}) => Promise.resolve(result));
 
     expect(await controller.searchDevelopers({})).toBe(result);
   });

@@ -5,14 +5,12 @@ import { DeveloperSearchInput } from '../graphql';
 
 @Resolver('Developer')
 export class DeveloperResolver {
-  constructor(
-    private developerService: DeveloperService,
-  ) {}
+  constructor(private developerService: DeveloperService) {}
 
   @Query()
   async searchDevelopers(
     @Args('input') input: DeveloperSearchInput,
-  ) : Promise<Developer[]> {
+  ): Promise<Developer[]> {
     return this.developerService.searchDevelopers(input);
   }
 }

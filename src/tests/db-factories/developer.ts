@@ -1,4 +1,4 @@
-import faker =  require('faker');
+import faker = require('faker');
 import factory from 'factory-girl';
 import { Developer } from '../../db/models';
 

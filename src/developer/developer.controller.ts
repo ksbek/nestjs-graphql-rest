@@ -8,7 +8,7 @@ export class DeveloperController {
   constructor(private developerService: DeveloperService) {}
 
   @Get()
-  searchDevelopers(@Query() query : DeveloperSearchInput) : Promise<Developer[]> {
+  searchDevelopers(@Query() query: DeveloperSearchInput): Promise<Developer[]> {
     return this.developerService.searchDevelopers(query);
   }
 }

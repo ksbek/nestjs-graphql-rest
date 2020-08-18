@@ -1,9 +1,9 @@
 export enum LanguageCode {
-  English  = 'en',
+  English = 'en',
   Japanese = 'ja',
-  Spanish  = 'es',
-  French   = 'fr',
+  Spanish = 'es',
+  French = 'fr',
   Georgian = 'ka',
-  Latin    = 'la',
-  Polish   = 'pl',
+  Latin = 'la',
+  Polish = 'pl',
 }

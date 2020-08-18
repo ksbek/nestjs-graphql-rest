@@ -8,6 +8,11 @@ export class DeveloperService {
     if (!input) {
       input = {};
     }
-    return Developer.searchDevelopers(input.programming_language, input.language, input.offset, input.limit);
+    return Developer.searchDevelopers(
+      input.programming_language,
+      input.language,
+      input.offset,
+      input.limit,
+    );
   }
 }

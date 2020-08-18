@@ -21,7 +21,9 @@ describe('DeveloperResolver', () => {
 
   it('should return array of developers', async () => {
     const result = [];
-    jest.spyOn(service, 'searchDevelopers').mockImplementation(({}) => Promise.resolve(result));
+    jest
+      .spyOn(service, 'searchDevelopers')
+      .mockImplementation(({}) => Promise.resolve(result));
 
     expect(await resolver.searchDevelopers({})).toBe(result);
   });

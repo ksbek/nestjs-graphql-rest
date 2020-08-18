@@ -15,7 +15,7 @@ describe('App integration test', () => {
     await app.init();
   });
 
-  afterEach( (done) => {
+  afterEach(done => {
     app.close();
     done();
   });
@@ -30,17 +30,20 @@ describe('App integration test', () => {
   it('/developers (GET)', () => {
     return request(app.getHttpServer())
       .get('/developers?programming_language=Javascript&language=en')
-      .expect(200)
+      .expect(200);
   });
 
   it('/graphql (POST)', () => {
     return request(app.getHttpServer())
       .post('/graphql')
       .send({
-        "operationName": "searchDevelopers",
-        "variables": { "input": { "programming_language": "Python", "language": "en" } },
-        "query": "query searchDevelopers($input: DeveloperSearchInput) {searchDevelopers(input: $input) {id email programming_languages {id name} languages {id code }}}"
+        operationName: 'searchDevelopers',
+        variables: {
+          input: { programming_language: 'Python', language: 'en' },
+        },
+        query:
+          'query searchDevelopers($input: DeveloperSearchInput) {searchDevelopers(input: $input) {id email programming_languages {id name} languages {id code }}}',
       })
-      .expect(200)
+      .expect(200);
   });
 });

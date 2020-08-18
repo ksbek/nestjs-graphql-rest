@@ -1,5 +1,5 @@
 import { Field, ObjectType } from 'type-graphql';
-import { 
+import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -7,15 +7,14 @@ import {
   ManyToMany,
   JoinTable,
   PrimaryGeneratedColumn,
-  BaseEntity
+  BaseEntity,
 } from 'typeorm';
 import { ProgrammingLanguage } from './programming_language.entity';
 import { Language } from './language.entity';
 
 @ObjectType()
-@Entity({name: 'developers'})
+@Entity({ name: 'developers' })
 export class Developer extends BaseEntity {
-
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
@@ -25,11 +24,11 @@ export class Developer extends BaseEntity {
   email: string;
 
   @Field()
-  @CreateDateColumn({name: 'created_at'})
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
   @Field()
-  @UpdateDateColumn({name: 'updated_at'})
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   // Associations
@@ -41,20 +40,27 @@ export class Developer extends BaseEntity {
   @JoinTable()
   languages: Language[];
 
-  static searchDevelopers(programming_language: string, language: string, offset: number, limit: number) : Promise<Developer[]> {
+  static searchDevelopers(
+    programming_language: string,
+    language: string,
+    offset: number,
+    limit: number,
+  ): Promise<Developer[]> {
     const query = this.createQueryBuilder('developer')
-        .leftJoinAndSelect(
-          'developer.programming_languages',
-          'programming_language',)
-        .leftJoinAndSelect(
-          'developer.languages',
-          'language');
+      .leftJoinAndSelect(
+        'developer.programming_languages',
+        'programming_language',
+      )
+      .leftJoinAndSelect('developer.languages', 'language');
 
     const queries = [];
     const options: any = {};
 
-    programming_language && (queries.push(`programming_language.name = :name`), options.name = programming_language);
-    language && (queries.push(`language.code = :code`), options.code = language);
+    programming_language &&
+      (queries.push(`programming_language.name = :name`),
+      (options.name = programming_language));
+    language &&
+      (queries.push(`language.code = :code`), (options.code = language));
 
     queries.length && query.where(queries.join(' AND '), options);
     offset && query.skip(offset);

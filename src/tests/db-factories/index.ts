@@ -13,7 +13,10 @@ function getDbConnection(): Promise<Connection> {
   return createConnection(testTypeOrmConnectionOptions);
 }
 
-export const initializeFactoryGirl = async (factory: factory.Static, connection?: Connection) : Promise<Connection> => {
+export const initializeFactoryGirl = async (
+  factory: factory.Static,
+  connection?: Connection,
+): Promise<Connection> => {
   const dbConnection = connection || (await getDbConnection());
   factory.setAdapter(new PostgresqlTypeOrmAdapter(dbConnection));
   return dbConnection;

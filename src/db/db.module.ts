@@ -7,7 +7,11 @@ import * as allEntities from './models';
 @Global()
 @Module({
   imports: [TypeOrmModule],
-  providers: [...Object.keys(allEntities).map(k => allEntities[k]), DbCommand, DbFixturesService],
+  providers: [
+    ...Object.keys(allEntities).map(k => allEntities[k]),
+    DbCommand,
+    DbFixturesService,
+  ],
   exports: [TypeOrmModule, DbCommand, DbFixturesService],
 })
 export class DbModule {}
