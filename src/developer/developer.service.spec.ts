@@ -53,6 +53,6 @@ describe('DeveloperService', () => {
 
     const developers = await service.searchDevelopers({ programming_language:  ProgrammingLanguageName.Typescript, language: LanguageCode.French });
 
-    expect(developers[0]).toMatch(developer2.email);
+    expect(developers[0].email).toMatch(developer2.email);
   });
 });
